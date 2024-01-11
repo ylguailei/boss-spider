@@ -59,6 +59,10 @@ public class BossDriver {
         ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].style.display = 'none';", element);
     }
 
+    public static void checkElement(WebElement element) {
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].checked = true;", element);
+    }
+
     public static void movetoElement(WebElement element) {
         Actions actions = new Actions(BossContext.getWebDriver());
         actions.moveToElement(element).perform();
@@ -66,6 +70,11 @@ public class BossDriver {
 //        if (searchItemElement != null) {
 //            setAttribuate(searchItemElement, "css", "form-item search-item search-item-city search-item-active");
 //        }
+    }
+
+    public static void moveAndClicktoElement(WebElement element) {
+        Actions actions = new Actions(BossContext.getWebDriver());
+        actions.moveToElement(element).click(element).perform();
     }
 
     public static void setAttribuate(WebElement eleemnt, String attrName, String attrValue) {

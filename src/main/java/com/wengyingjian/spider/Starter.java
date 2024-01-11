@@ -31,41 +31,40 @@ public class Starter {
         WebElement searchElement = BossDriver.findElementByXpath("//*[@class='cate-search']");
         if (searchElement != null) {
             Thread.sleep(100);
-//            WebElement chooseJobElement = searchElement.findElement(By.xpath("//*[@class='choose-job job-check']"));
-//            if (chooseJobElement != null) {
-//                BossDriver.blockElement(chooseJobElement);
-//            }
-//            List<WebElement> postList = searchElement.findElements(By.xpath("//*[@class='choose-job job-check']/div[2]/div/div[2]/div[2]/div"));
-//            for (int i = 0; i < postList.size(); i++) {
-//                WebElement element = postList.get(i).findElement(By.xpath("//*[@class='job-type-item-text']"));
-//                if (element != null) {
-//                    element.click();
-//                    BossDriver.hiddenElement(chooseJobElement);
-//                    searchService.doSearch("保安");
-//                    Thread.sleep(1000L);
-//                    Integer totalSize = searchService.searchResultCount();
-//                    //打招呼
-//                    IHelloService helloService = new FiveEightHelloService();
-//                    for (int j = 0; j < totalSize; j++) {
-//                        System.out.println("current=" + j);
-//                        helloService.sayHello(j);
-//                    }
-//                }
-//            }
             try {
+                //随便在搜索区域点击一下
                 BossDriver.findElement(By.xpath("//*[@class='search-form-area']")).click();
             } catch (Exception ex) {
 
             }
             try {
+                //将网页上的透明浮层隐藏掉
                 WebElement zcmMaskElement = BossDriver.findElement(By.xpath("//*[@class='zcm-mask']"));
                 BossDriver.hiddenElement(zcmMaskElement);
             } catch (Exception ex) {
 
             }
+            try {
+                //将网页上的透明浮层隐藏掉
+                WebElement zcmTipsElement = BossDriver.findElement(By.xpath("//*[@class='zcm-tips zcm-tips-show']"));
+                BossDriver.hiddenElement(zcmTipsElement);
+            } catch (Exception ex) {
+
+            }
+            try {
+                //bannerWraper
+                //将网页上的透明浮层隐藏掉
+                WebElement bannerElement = BossDriver.findElement(By.xpath("//*[@id='bannerContainer']"));
+                BossDriver.hiddenElement(bannerElement);
+            } catch (Exception ex) {
+
+            }
+            //做筛选
             searchService.doFilter();
-            searchService.doSearch("保安");
+            //做查询
+            searchService.doSearch("");
             Thread.sleep(1000L);
+            //获取查询结果数量
             Integer totalSize = searchService.searchResultCount();
             //打招呼
             IHelloService helloService = new FiveEightHelloService();

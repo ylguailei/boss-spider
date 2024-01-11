@@ -4,6 +4,10 @@ import com.wengyingjian.spider.config.SeleniumConfigHolder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class FiveEightDriver {
     static {
         System.setProperty(SeleniumConfigHolder.DRIVER_PATH_KEY, SeleniumConfigHolder.getDriverPath());
@@ -57,35 +61,63 @@ public class FiveEightDriver {
         //有则关闭提示
         try {
             ////*[@id="container"]/div[2]/div[2]/div/span/a
-            Thread.sleep(200);
+            Thread.sleep(2000);
             if (function.click(element)) {
+                BossDriver.movetoElement(element);
+                BossDriver.hiddenElement(findElement(By.xpath("//*[@class='hx-app-header-box t-hx-new-header-container']")));
+                Thread.sleep(1000);
                 element.click();
                 Thread.sleep(1000);
                 try {
+                    //这里是与TA沟通职位的列表
                     findElement(By.xpath("//*[@class='chat-select-ok']")).click();
                     Thread.sleep(1000);
-                }catch (Exception ex){
+
+                } catch (Exception ex) {
 
                 }
 
                 //footer-button svelte-jhvdkk
+                Integer msgCnt = 0;
                 try {
+                    WebElement msgCntElement = findElement(By.xpath("//*[@class='resource-desc svelte-jhvdkk']"));
+                    if (msgCntElement != null) {
+                        String cntStr = msgCntElement.getText();
+                        Pattern pattern = Pattern.compile("\\d+");
+                        Matcher matcher = pattern.matcher(cntStr);
+                        if (matcher.find()) {
+                            msgCnt = Integer.valueOf(matcher.group());
+                        }
+                    }
                     findElement(By.xpath("//*[@class='footer-button svelte-jhvdkk']")).click();
                     Thread.sleep(1000);
-                }catch (Exception ex){
+                } catch (Exception ex) {
 
                 }
                 //batch-chat-dialog__close
                 try {
+                    //这里是当沟通次数用完之后的弹窗
                     findElement(By.xpath("//*[@class='batch-chat-dialog__close']")).click();
                     Thread.sleep(200);
-                }catch (Exception e){
-
+//                    if(msgCnt == 0){
+//                        try {
+//                            //这里是与TA沟通职位的列表
+//                            findElement(By.xpath("//*[@class='chat-select-ok']")).click();
+//                            Thread.sleep(1000);
+//
+//                            List<WebElement> jobList = BossDriver.findElementsByXpath("//*[@class='chat-select-joblist']");
+//
+//                        } catch (Exception ex) {
+//
+//                        }
+//
+//                    }
+                } catch (Exception e) {
                 }
-                try{
+                try {
                     findElement(By.xpath("//*[@class='dialog-close']")).click();
                     Thread.sleep(200);
-                }catch (Exception ex){
+                } catch (Exception ex) {
 
                 }
             }
