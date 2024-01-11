@@ -1,23 +1,46 @@
-package com.wengyingjian.spider.service;
+package com.wengyingjian.spider.service.impl;
 
 import com.wengyingjian.spider.components.BossDriver;
+import com.wengyingjian.spider.service.ISearchService;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-public class SearchService {
+public class BossSearchService implements ISearchService {
 
 
-    public void doSearch() throws InterruptedException {
-        //提示点击"知道了"
-        //*[@id="wrap"]/div[1]/div[2]/div[1]/div[2]/a
-        BossDriver.clickByXpath("//*[@id=\"wrap\"]/div[1]/div[2]/div[1]/div[2]/a");
-        //== 筛选
-        doSearchByConditions();
+    public void doSearch(String postKeyWord) {
+        try {
+            //提示点击"知道了"
+            //*[@id="wrap"]/div[1]/div[2]/div[1]/div[2]/a
+//        BossDriver.clickByXpath("//*[@id=\"wrap\"]/div[1]/div[2]/div[1]/div[2]/a");
+            BossDriver.findElement(By.className("btn chat-btn"));
+            //== 筛选
+            doSearchByConditions();
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void doFilter() {
+
+    }
+
+    @Override
+    public Integer searchResultCount() {
+        return null;
+    }
+
+    @Override
+    public void pageSearch() {
 
     }
 
 
     private void doSearchByConditions() throws InterruptedException {
         //点击筛选
-        BossDriver.clickByXpath("//*[@id=\"wrap\"]/div[1]/div[2]/div[2]/div/span");
+//        BossDriver.clickByXpath("//*[@id=\"wrap\"]/div[1]/div[2]/div[2]/div/span");
+        BossDriver.clickByXpath("//*[@class='btn chat-btn']");
         //点击3-5年
         setExp3_5();
         Thread.sleep(1000);

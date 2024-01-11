@@ -1,0 +1,19 @@
+<launch4jConfig>
+    <headerType>gui</headerType>
+    <jar>path_to_your_jar_file\YourProgram.jar</jar>
+    <outfile>path_to_output_folder\YourProgram.exe</outfile>
+    <errTitle></errTitle>
+    <classPath>
+        <mainClass>com.wengyingjian.spider.Starter</mainClass>
+    </classPath>
+    <versionInfo>
+        <fileVersion>1.0.0.0</fileVersion>
+        <txtFileVersion>1.0.0.0</txtFileVersion>
+        <productName>打招呼神器</productName>
+        <companyName>打招呼神器</companyName>
+        <copyright>© Your Copyright Notice</copyright>
+        <trademarks>Trademark(s)</trademarks>
+        <internalName>YourProgram</internalName>
+        <originalFilename>打招呼神器.exe</originalFilename>
+    </versionInfo>
+</launch4jConfig>

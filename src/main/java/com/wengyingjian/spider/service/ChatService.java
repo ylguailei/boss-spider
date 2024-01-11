@@ -3,7 +3,7 @@ package com.wengyingjian.spider.service;
 import com.wengyingjian.spider.components.BossDriver;
 import org.openqa.selenium.WebElement;
 
-public class ChatService {
+public class ChatService implements IChatService {
 
 
     /**
@@ -62,10 +62,14 @@ public class ChatService {
      * @param index 序号，第几个人
      * @param msgs  内容
      */
-    public ChatService send(int index, String... msgs) throws InterruptedException {
-        target(index);
-        for (String msg : msgs) {
-            send(msg);
+    public ChatService send(int index, String... msgs) {
+        try {
+            target(index);
+            for (String msg : msgs) {
+                send(msg);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return this;
     }

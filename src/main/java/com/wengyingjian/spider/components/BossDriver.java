@@ -3,6 +3,9 @@ package com.wengyingjian.spider.components;
 import com.wengyingjian.spider.config.SeleniumConfigHolder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import java.util.List;
 
 public class BossDriver {
 
@@ -35,9 +38,38 @@ public class BossDriver {
         }
     }
 
+    public static List<WebElement> findElementsByXpath(String xpath) {
+        try {
+            return BossContext.getWebDriver().findElements(By.xpath(xpath));
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
 
     public static void clickByXpath(String xpath) {
         clickByXpath(xpath, false, element -> true);
+    }
+
+    public static void blockElement(WebElement element) {
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].style.display = 'block';", element);
+    }
+
+    public static void hiddenElement(WebElement element) {
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].style.display = 'none';", element);
+    }
+
+    public static void movetoElement(WebElement element) {
+        Actions actions = new Actions(BossContext.getWebDriver());
+        actions.moveToElement(element).perform();
+//        WebElement searchItemElement = findElement(By.xpath("//*[@class='form-item search-item search-item-city search-item-active']"));
+//        if (searchItemElement != null) {
+//            setAttribuate(searchItemElement, "css", "form-item search-item search-item-city search-item-active");
+//        }
+    }
+
+    public static void setAttribuate(WebElement eleemnt, String attrName, String attrValue) {
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].setAttribute(arguments[1],arguments[2])", eleemnt, attrName, attrValue);
     }
 
 
@@ -60,6 +92,7 @@ public class BossDriver {
             ////*[@id="container"]/div[2]/div[2]/div/span/a
             Thread.sleep(200);
             findElement(By.xpath("//*[@id=\"container\"]/div[2]/div[2]/div/span/a")).click();
+            //findElement(By.xpath("//*[@id='infolist']/div/div[3]/div[2]")).click();
         } catch (Exception e) {
 
         }
