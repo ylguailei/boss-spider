@@ -8,14 +8,14 @@ import org.openqa.selenium.WebDriver;
 
 public class FiveEightLoginService implements ILoginService {
     @Override
-    public void login() {
+    public void login(String redirectUrl) {
         try {
             WebDriver driver = BossContext.getWebDriver();
             driver.get(BossUrlConstants.URL_58_MAIN);
             Thread.sleep(1000);
             addCookie(driver);
             Thread.sleep(1000);
-            driver.get(BossUrlConstants.URL_58_SEARCH);
+            driver.get(redirectUrl);
             Thread.sleep(1000);
         } catch (Exception ex) {
             ex.printStackTrace();

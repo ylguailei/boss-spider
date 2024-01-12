@@ -27,7 +27,7 @@ public class BossSearchService implements ISearchService {
     }
 
     @Override
-    public Integer searchResultCount() {
+    public Integer searchResultCount(String xpath) {
         return null;
     }
 

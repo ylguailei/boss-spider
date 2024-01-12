@@ -1,15 +1,16 @@
-package com.wengyingjian.spider.service;
+package com.wengyingjian.spider.service.impl;
 
 import com.wengyingjian.spider.components.BossDriver;
+import com.wengyingjian.spider.service.IChatService;
 import org.openqa.selenium.WebElement;
 
-public class ChatService implements IChatService {
+public class BossChatService implements IChatService {
 
 
     /**
      * 切换到沟通面板
      */
-    public ChatService switchTo() throws InterruptedException {
+    public BossChatService switchTo() throws InterruptedException {
         BossDriver.clickByXpath("//*[@id=\"main\"]/div[1]/div/dl[4]/dt/a");
         Thread.sleep(1000);
         return this;
@@ -20,7 +21,7 @@ public class ChatService implements IChatService {
      *
      * @param index 序号，第几个人
      */
-    public ChatService target(int index) throws InterruptedException {
+    public BossChatService target(int index) throws InterruptedException {
         BossDriver.scrollAndClickByXpath(getTargetXpath(index), element -> true);
         Thread.sleep(1000);
         return this;
@@ -36,7 +37,7 @@ public class ChatService implements IChatService {
      *
      * @param msg 内容
      */
-    private ChatService write(String msg) {
+    private BossChatService write(String msg) {
         WebElement webElement = BossDriver.findElementByXpath("//*[@id=\"container\"]/div[1]/div[2]/div[4]/div[2]/div[2]/div[2]/div[2]");
         webElement.sendKeys(msg);
         return this;
@@ -46,12 +47,12 @@ public class ChatService implements IChatService {
     /**
      * 发送
      */
-    private ChatService send() {
+    private BossChatService send() {
         BossDriver.clickByXpath("//*[@id=\"container\"]/div[1]/div[2]/div[4]/div[2]/div[2]/div[2]/div[3]/button");
         return this;
     }
 
-    public ChatService send(String msg) {
+    public BossChatService send(String msg) {
         return write(msg).send();
     }
 
@@ -62,7 +63,7 @@ public class ChatService implements IChatService {
      * @param index 序号，第几个人
      * @param msgs  内容
      */
-    public ChatService send(int index, String... msgs) {
+    public IChatService send(int index, String... msgs) {
         try {
             target(index);
             for (String msg : msgs) {

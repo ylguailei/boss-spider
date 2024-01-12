@@ -1,7 +1,7 @@
 package com.wengyingjian.spider;
 
 import com.wengyingjian.spider.components.BossDriver;
-import com.wengyingjian.spider.service.ChatService;
+import com.wengyingjian.spider.service.impl.BossChatService;
 import com.wengyingjian.spider.service.impl.BossLoginService;
 
 public class ChatTest {
@@ -11,9 +11,9 @@ public class ChatTest {
         BossDriver.init();
 
         //登录
-        new BossLoginService().login();
+        new BossLoginService().login("");
 
-        new ChatService().switchTo().send(1, "你好", "简历已收到");
+        new BossChatService().switchTo().send(1, "你好", "简历已收到");
 
         BossDriver.close();
     }

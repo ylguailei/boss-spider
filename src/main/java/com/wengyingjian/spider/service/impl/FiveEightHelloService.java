@@ -14,6 +14,11 @@ public class FiveEightHelloService implements IHelloService {
         }
     }
 
+    @Override
+    public void sendMsg(String msg) {
+
+    }
+
     private String getSayHelloXpath(int index) {
 //        return "//*[@id=\"recommend-list\"]/div[1]/ul/li[" + index + "]/div[1]/button[2]";
 //        return "//*[@class='btn chat-btn']";

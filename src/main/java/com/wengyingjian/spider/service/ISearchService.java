@@ -7,7 +7,7 @@ public interface ISearchService {
 
     void doFilter();
 
-    Integer searchResultCount();
+    Integer searchResultCount(String xpath);
 
     void pageSearch();
 }

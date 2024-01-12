@@ -8,12 +8,12 @@ import org.openqa.selenium.WebDriver;
 
 public class BossLoginService implements ILoginService {
 
-    public void login() {
+    public void login(String redirectUrl) {
         try {
             WebDriver driver = BossContext.getWebDriver();
             driver.get(BossUrlConstants.URL_BOSS_RECOMMEND);
             addCookie(driver);
-            driver.get(BossUrlConstants.URL_BOSS_RECOMMEND);
+            driver.get(redirectUrl);
             Thread.sleep(1000);
         } catch (Exception ex) {
             ex.printStackTrace();

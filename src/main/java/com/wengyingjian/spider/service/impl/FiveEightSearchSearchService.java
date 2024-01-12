@@ -124,10 +124,10 @@ public class FiveEightSearchSearchService implements ISearchService {
     }
 
     @Override
-    public Integer searchResultCount() {
+    public Integer searchResultCount(String xpath) {
         Integer pageCount = 0;
         try {
-            List<WebElement> list = BossDriver.findElementsByXpath("//*[@id='infolist']/div");
+            List<WebElement> list = BossDriver.findElementsByXpath(xpath);
             if (list != null && list.size() > 0) {
                 pageCount = list.size();
             }
