@@ -81,6 +81,18 @@ public class BossDriver {
         ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].setAttribute(arguments[1],arguments[2])", eleemnt, attrName, attrValue);
     }
 
+    public static void scrollByXpath(String xpath) {
+        WebElement element = findElement(By.xpath(xpath));
+        //按钮不存在
+        if (element == null) {
+            return;
+        }
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("arguments[0].scrollIntoView();", element);
+    }
+
+    public static void scrollByHeight(Integer height) {
+        ((JavascriptExecutor) BossContext.getWebDriver()).executeScript("window.scrollTo(0, " + height + ")");
+    }
 
     public static void scrollAndClickByXpath(String xpath, Function function) {
         clickByXpath(xpath, true, function);

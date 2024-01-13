@@ -5,19 +5,25 @@ import com.wengyingjian.spider.service.IHelloService;
 
 public class FiveEightHelloService implements IHelloService {
     @Override
-    public void sayHello(int index) {
+    public void sayHello(String xpath) {
         try {
-            FiveEightDriver.scrollAndClickByXpath(getSayHelloXpath(index), element -> element.getText().contains("在线沟通"));
+            FiveEightDriver.scrollAndClickByXpath(xpath, element -> element.getText().contains("在线沟通"));
             Thread.sleep(1000);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+//        try {
+//            FiveEightDriver.scrollAndClickByXpath(xpath, element -> element.getText().contains("在线沟通"));
+//            Thread.sleep(1000);
+//        } catch (Exception ex) {
+//
+//        }
     }
 
-    @Override
-    public void sendMsg(String msg) {
-
+    private String getRecommendXpath(int index) {
+        return "//*[id='infolist']/li[" + index + "]/div/div/div/button[2]";
     }
+
 
     private String getSayHelloXpath(int index) {
 //        return "//*[@id=\"recommend-list\"]/div[1]/ul/li[" + index + "]/div[1]/button[2]";

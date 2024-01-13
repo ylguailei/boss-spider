@@ -10,19 +10,15 @@ public class BossHelloService implements IHelloService {
      *
      * @param index 序号，第几个人
      */
-    public void sayHello(int index) {
+    public void sayHello(String xpath) {
         try {
-            BossDriver.scrollAndClickByXpath(getSayHelloXpath(index), element -> element.getText().contains("打招呼"));
+            BossDriver.scrollAndClickByXpath(xpath, element -> element.getText().contains("打招呼"));
             Thread.sleep(1000);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    @Override
-    public void sendMsg(String msg) {
-
-    }
 
     //获取打招呼按钮的xpath
     private String getSayHelloXpath(int index) {

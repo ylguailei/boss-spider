@@ -1,7 +1,8 @@
 package com.wengyingjian.spider.service;
 
-public interface IHelloService {
-    void sayHello(int index);
+import java.util.function.Function;
 
-    void sendMsg(String msg);
+public interface IHelloService {
+    void sayHello(String xpath);
+
 }

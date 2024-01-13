@@ -1,6 +1,8 @@
 package com.wengyingjian.spider;
 
+import com.sun.org.apache.xpath.internal.XPathContext;
 import com.wengyingjian.spider.components.BossDriver;
+import com.wengyingjian.spider.components.XpathConsts;
 import com.wengyingjian.spider.config.BossUrlConstants;
 import com.wengyingjian.spider.service.IChatService;
 import com.wengyingjian.spider.service.IHelloService;
@@ -29,7 +31,7 @@ public class Starter {
          * 以下为沟通任务
          */
         ILoginService loginService = new FiveEightLoginService();
-        loginService.login(BossUrlConstants.URL_58_IM);
+        loginService.login(BossUrlConstants.URL_58_RECOMMAND);
 
         try {
             //将网页上的透明浮层隐藏掉
@@ -57,14 +59,62 @@ public class Starter {
 
         }
 
-        //获取IM沟通列表
-        ISearchService searchService = new FiveEightSearchSearchService();
-        Integer totalSize = searchService.searchResultCount("//*[@class='todo-list']/div");
-        IChatService chatService = new FiveEightChatService();
-        for (int i = 1; i < totalSize; i++) {
-            System.out.println("current=" + i);
-            chatService.send(i, "麻烦您点一下：换微信，可以直接复制下面到  微号  添加框加我的哈");
+        try {
+            //ant-modal-wrap ant-modal-centered
+            //将首次进入时提示未认证的弹层关闭
+            WebElement bannerElement = BossDriver.findElement(By.xpath("//*[@class='ant-modal-root']"));
+            BossDriver.hiddenElement(bannerElement);
+            Thread.sleep(100);
+        } catch (Exception ex) {
+
         }
+
+        try {
+            //ant-modal-wrap ant-modal-centered
+            //将首次进入时提示未认证的弹层关闭
+            WebElement bannerElement = BossDriver.findElement(By.xpath("//*[@id='t-hx-popup-container']"));
+            BossDriver.hiddenElement(bannerElement);
+            Thread.sleep(100);
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            //ant-modal-wrap ant-modal-centered
+            //将首次进入时提示未认证的弹层关闭
+            WebElement bodyElement = BossDriver.findElement(By.xpath("//body"));
+            BossDriver.setAttribuate(bodyElement, "style", "display:block;");
+            Thread.sleep(100);
+        } catch (Exception ex) {
+
+        }
+
+        try {
+            BossDriver.scrollByHeight(2600);
+            Thread.sleep(1000);
+        } catch (Exception ex) {
+
+        }
+
+        //以下为基于推荐职位打招呼
+        ISearchService searchService = new FiveEightSearchSearchService();
+        Integer totalSize = searchService.searchResultCount("//*[@id='root']/div/div/div[2]/div[5]/div/div[2]/ul/li");
+        //            //打招呼
+        IHelloService helloService = new FiveEightHelloService();
+        for (int j = 1; j <= totalSize; j++) {
+            System.out.println("current=" + j);
+            helloService.sayHello(XpathConsts.getRecommendXpathWith58(j));
+        }
+
+        //获取IM沟通列表
+//        ISearchService searchService = new FiveEightSearchSearchService();
+//        Integer totalSize = searchService.searchResultCount("//*[@class='todo-list']/div");
+//        IChatService chatService = new FiveEightChatService();
+//        for (int i = 1; i < totalSize; i++) {
+//            System.out.println("current=" + i);
+//            chatService.send(i, "麻烦您点一下：换微信，可以直接复制下面到  微号  添加框加我的哈");
+//        }
+
 //        IHelloService helloService = new FiveEightHelloService();
 //        for (int j = 1; j <= totalSize; j++) {
 //            System.out.println("current=" + j);
